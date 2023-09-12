@@ -1,8 +1,16 @@
-import { Moon, Sun, Github, FileVideo } from 'lucide-react';
+import { Moon, Sun, Github, FileVideo, Upload } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -112,11 +120,33 @@ export function App() {
               <Textarea
                 placeholder="Inclue palavras-chaves separadas por virgulas"
                 id="transcription_prompt"
-                className="min-h-20 leading-relaxed"
+                className="min-h-20 leading-relaxed h-20"
               />
             </div>
 
-            <Button>Carregar Video</Button>
+            <Button type="submit" className="w-full">
+              Carregar Video
+              <Upload className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
+
+          <Separator />
+
+          <form className="space-y-6">
+            <div className="space-y-2">
+              <Label>Select</Label>
+              <Select disabled defaultValue="gpt-3.5">
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={'gpt-3.5'}>GPT 3.5-turbo 16k</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className="block text-sm text-muted-foreground italic ml-2">
+                voce podera customizar essa opcao em breve...
+              </span>
+            </div>
           </form>
         </aside>
       </main>
