@@ -1,4 +1,4 @@
-import { Moon, Sun, Github, FileVideo, Upload } from 'lucide-react';
+import { Moon, Sun, Github, FileVideo, Upload, Wand2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Slider } from './components/ui/slider';
 
 export function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -126,13 +127,28 @@ export function App() {
 
             <Button type="submit" className="w-full">
               Carregar Video
-              <Upload className="w-4 h-4 ml-2" />
+              <Upload className="w-4 h-4 ml-4" />
             </Button>
           </form>
 
           <Separator />
 
           <form className="space-y-6">
+            <div className="space-y-2">
+              <Label>Prompt</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione um Prompt" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={'title'}>Título do Youtube</SelectItem>
+                  <SelectItem value={'description'}>
+                    Descrição do Youtube
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="space-y-2">
               <Label>Select</Label>
               <Select disabled defaultValue="gpt-3.5">
@@ -143,10 +159,29 @@ export function App() {
                   <SelectItem value={'gpt-3.5'}>GPT 3.5-turbo 16k</SelectItem>
                 </SelectContent>
               </Select>
-              <span className="block text-sm text-muted-foreground italic ml-2">
-                voce podera customizar essa opcao em breve...
+              <span className="block text-sm text-muted-foreground italic ml-1">
+                Você poderá customizar essa opção em breve...
               </span>
             </div>
+
+            <Separator />
+
+            <div className="space-y-4">
+              <Label>Temperatura</Label>
+
+              <Slider defaultValue={[33]} max={100} step={1} />
+
+              <span className="block text-sm text-muted-foreground italic ml-1 leading-relaxed">
+                Valores mais altos tendem a deixar o resultado mais criativo e
+                com possíveis erros..
+              </span>
+            </div>
+            <Separator />
+
+            <Button className="w-full">
+              Executar
+              <Wand2 className="w-4 h-4 ml-4" />
+            </Button>
           </form>
         </aside>
       </main>
